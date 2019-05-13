@@ -28,7 +28,7 @@ class App extends Component {
   };
 
   _validateVideo = videoID =>
-    this.state.videos.some(video => video.videoID === videoID);
+    this.props.videos.some(video => video.videoID === videoID);
 
   onVideoSubmited = video => {
     const hasVideo = this._validateVideo(video.videoID);
@@ -40,20 +40,16 @@ class App extends Component {
     }
   };
 
-  playNextVideo = previousVideo => {
-    const indexOfCurrent = this.state.videos.findIndex(e => {
-      return e.videoID === previousVideo;
+  playNextVideo = previousVideoID => {
+    const {selectVideo, videos} = this.props;
+    const indexOfCurrent = videos.findIndex(e => {
+      return e.videoID === previousVideoID;
     });
     let nextIndex = indexOfCurrent + 1;
-    if (!this.state.videos[nextIndex]) {
+    if (!videos[nextIndex]) {
       nextIndex = 0;
     }
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        selectedVideo: prevState.videos[nextIndex]
-      };
-    });
+    selectVideo(videos[nextIndex]);
   };
 
   // YTPlayler callbacks

@@ -2,7 +2,7 @@ import React, { useState, createRef } from "react";
 import classses from "./AddVideoForm.module.scss";
 import PropTypes from "prop-types";
 
-const FIELDS = ["artist", "title", "videoURL"];
+const FIELDS = ["artist", "title", "videoID"];
 
 const AddVideoForm = props => {
   const [formState, setFormState] = useState({
@@ -54,8 +54,7 @@ const AddVideoForm = props => {
       case "videoID":
         let invalidUrlErrorMessage = "URL is invalid";
         if (
-          value.length &&
-          /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(value)
+          value.length && /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(value)
         ) {
           invalidUrlErrorMessage = "";
           _updateError(invalidUrlErrorMessage);
@@ -74,12 +73,16 @@ const AddVideoForm = props => {
     }
   };
 
-  const _extractVideoID = url => url.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/)[2];
+  const _extractVideoID = url => {
+    if(!url) return;
+    return url.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/)[2];
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
     const { onVideoSubmited } = props;
     const { form } = formState;
+    const videoID =_extractVideoID();
     const updatedData = {
       ...form,
       videoID: _extractVideoID(form.videoID)
@@ -118,10 +121,12 @@ const AddVideoForm = props => {
       </div>
     </form>
   );
+
+
 };
 
 AddVideoForm.propTypes = {
   onVideoSubmited: PropTypes.func.isRequired
-};
+}
 
 export default AddVideoForm;
