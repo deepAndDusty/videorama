@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import throttle from 'lodash/throttle';
 
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
 
 import videosReducer from "./store/reducers/videos";
 import { saveState, loadState } from "./localStorage";
@@ -11,11 +11,6 @@ import { saveState, loadState } from "./localStorage";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
-// const rootReducer = combineReducers({
-//     vr: videosReducer,
-//     fr: formReducer
-// });
 
 const storedState = loadState('videorama');
 

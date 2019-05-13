@@ -21,3 +21,17 @@
   background-color: $blue;
   color: $fontColor;
 }
+
+
+@media screen and (max-width: 600px) {
+  .inputContainer{
+    padding: $baseSize / 2;
+  }
+  .inputLabel {
+    width: 150px;
+  }
+  .formInput {
+    display: inline-flex;
+    margin: $baseSize / 2; 
+  }
+}

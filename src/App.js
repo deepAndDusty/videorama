@@ -16,7 +16,6 @@ class App extends Component {
     continuousPlay: true
   };
 
-
   _getInitialVideoID = () => {
     const { videoID } = this.props.selectedVideo;
     const { continuousPlay } = this.state;
@@ -83,24 +82,26 @@ class App extends Component {
     const { videos, selectedVideo, addVideo, removeVideo } = this.props;
     const isEmptyPlaylist = !!(this.videos && !this.videos.length);
     return (
-      <SplitPane
-        leftTop={<AddVideoForm onVideoSubmited={addVideo} />}
-        leftBottom={
-          <List
-            clickHandler={this.onVideoPlay}
-            deleteHandler={removeVideo}
-            data={videos}
-          />
-        }
-        right={
-          <YTPlayer
-            isEmptyPlaylist={isEmptyPlaylist}
-            selectedVideo={selectedVideo}
-            onReady={this.onVideoReady}
-            onEnd={this.onEnd}
-          />
-        }
-      />
+      <div className="mainContainer">
+        <SplitPane
+          leftTop={<AddVideoForm onVideoSubmited={addVideo} />}
+          leftBottom={
+            <List
+              clickHandler={this.onVideoPlay}
+              deleteHandler={removeVideo}
+              data={videos}
+            />
+          }
+          right={
+            <YTPlayer
+              isEmptyPlaylist={isEmptyPlaylist}
+              selectedVideo={selectedVideo}
+              onReady={this.onVideoReady}
+              onEnd={this.onEnd}
+            />
+          }
+        />
+      </div>
     );
   }
 }

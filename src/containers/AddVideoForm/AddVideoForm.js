@@ -2,6 +2,8 @@ import React, { useState, createRef } from "react";
 import classses from "./AddVideoForm.module.scss";
 import PropTypes from "prop-types";
 
+const FIELDS = ["artist", "title", "videoURL"];
+
 const AddVideoForm = props => {
   const [formState, setFormState] = useState({
     form: {
@@ -18,7 +20,7 @@ const AddVideoForm = props => {
   const { errorMessage } = formState;
   const hasError = !!errorMessage.length;
 
-  const formContent = Object.keys(formState.form).map((el, idx) => {
+  const formContent = FIELDS.map((el, idx) => {
     const label = el.toUpperCase;
     return (
       <div className={classses.inputContainer} key={idx}>
