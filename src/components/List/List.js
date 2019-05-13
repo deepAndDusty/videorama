@@ -5,7 +5,10 @@ import ListItem from "./ListItem/ListItem";
 
 const List = props => {
   const { data, clickHandler, deleteHandler} = props;
-  return data.map((data, idx) => <ListItem key={idx} data={{...data}} deleteHandler={deleteHandler} clickHandler={clickHandler} />);
+  if(data){
+    return data.map((data, idx) => <ListItem key={idx} data={{...data}} deleteHandler={deleteHandler} clickHandler={clickHandler} />);
+  }
+  return null;
 };
 
 List.propTypes = {

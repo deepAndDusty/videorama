@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import SplitPane from "./components/SplitPane/SplitPane";
 import AddVideoForm from "./containers/AddVideoForm/AddVideoForm";
 import List from "./components/List/List";
 import YTPlayer from "./components/YTPlayer/YTPlayer";
 import fa from "./FontAwesome";
+import * as actionTypes from "./store/actions";
 
 class App extends Component {
   state = {
@@ -108,12 +111,8 @@ class App extends Component {
   }
 
   onVideoPlay = selectedVideo => {
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        selectedVideo: selectedVideo
-      };
-    });
+    const { selectVideo} = this.props;
+    selectVideo(selectedVideo);
   };
 
   onVideoRemove = (selected) => {
@@ -123,12 +122,12 @@ class App extends Component {
   }
 
   render() {
-    const { videos, selectedVideo, isEmptyPlaylist } = this.state;
-
+    const { videos, selectedVideo, addVideo, removeVideo } = this.props;
+    const isEmptyPlaylist = !!(this.videos && !this.videos.length);
     return (
       <SplitPane
-        leftTop={<AddVideoForm onVideoSubmited={this.onVideoSubmited} />}
-        leftBottom={<List clickHandler={this.onVideoPlay} deleteHandler={this.onVideoRemove} data={videos} />}
+        leftTop={<AddVideoForm onVideoSubmited={addVideo} />}
+        leftBottom={<List clickHandler={this.onVideoPlay} deleteHandler={removeVideo} data={videos} />}
         right={
             <YTPlayer
               isEmptyPlaylist={isEmptyPlaylist}
@@ -142,4 +141,29 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  videos: PropTypes.array,
+  selectedVideo: PropTypes.object,
+  selectVideo: PropTypes.func,
+  addVideo: PropTypes.func,
+  removeVideo: PropTypes.func,
+}
+
+const mapStateToProps = state => {
+  return {
+      videos: state.videos,
+      selectedVideo: state.selectedVideo
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addVideo: (video) => dispatch({type: actionTypes.ADD_VIDEO, payload: video }),
+    removeVideo: (video) => dispatch({type: actionTypes.REMOVE_VIDEO, payload: video.videoID }),
+    selectVideo: (video) => {
+      dispatch({type: actionTypes.SELECT_VIDEO, payload: video.videoID });
+  }
+}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
