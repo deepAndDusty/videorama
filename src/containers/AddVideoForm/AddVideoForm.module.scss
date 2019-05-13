@@ -1,0 +1,23 @@
+@import "../../global.scss";
+
+.inputContainer{
+  padding: $baseSize;  
+  &:last-child{
+    text-align: right;
+  }
+}
+.inputLabel {
+  text-transform: capitalize;
+}
+.formInput {
+  display: block;
+  margin-top: $baseSize / 2; 
+}
+.submitButton {
+  height: 20px;
+  border: none;
+  outline: none;
+  width: 100px;
+  background: $blue;
+  color: $fontColor;
+}

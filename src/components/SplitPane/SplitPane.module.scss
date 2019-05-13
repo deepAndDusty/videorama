@@ -1,0 +1,42 @@
+@import "../../global.scss";
+
+.splitPane {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: $primary;
+  .leftPane {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border-right: 1px solid $secondary;
+    .topPane {
+      flex: 1;
+      border-bottom: 1px solid $secondary;
+    }
+    .botomPane {
+      flex: 3;
+      overflow: scroll;
+    }
+  }
+  .rightPane {
+    flex: 3;
+    align-self: center;
+  }
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .splitPane {
+    flex-direction: column-reverse;
+    .leftPane {
+        flex: 2;
+    }
+    .rightPane {
+        flex: 1;
+        align-self: auto;
+      }
+  }
+}
