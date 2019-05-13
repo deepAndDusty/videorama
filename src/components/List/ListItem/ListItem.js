@@ -7,7 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const ListItem = ({ data, clickHandler, deleteHandler }) => {
   const {artist, title, videoID} = data;
   const video = {artist, title, videoID};
-  
+  const _handleDelete = (e) => {
+    e.preventDefault(); 
+    deleteHandler(video);
+  }
+
   return (
     <div className={classes.container} onClick={() => clickHandler(video)}>
       <img className={classes.thumbnail} src={`https://img.youtube.com/vi/${videoID}/default.jpg`} alt=""/>
@@ -15,7 +19,7 @@ const ListItem = ({ data, clickHandler, deleteHandler }) => {
         <div>{artist}</div>
         <div>{title}</div>
       </div>
-      <div className={classes.deleteBtnContainer} onClick={() => deleteHandler(video)}>
+      <div className={classes.deleteBtnContainer} onClick={_handleDelete}>
         <FontAwesomeIcon icon="times-circle"/>
       </div>
     </div>

@@ -86,7 +86,6 @@ class App extends Component {
 
 
   onEnd = event => {
-    debugger
     const previousVideo = event.target.getVideoData();
     if(this.state.continuousPlay){
       this.playNextVideo(previousVideo.video_id);
@@ -119,7 +118,7 @@ class App extends Component {
 
   onVideoRemove = (selected) => {
     const updatedState = this.state.videos.filter(item => item.videoID !== selected.videoID);
-    this.
+    this._persistStateToStorage();
     this._setVideos(updatedState);
   }
 
@@ -131,12 +130,12 @@ class App extends Component {
         leftTop={<AddVideoForm onVideoSubmited={this.onVideoSubmited} />}
         leftBottom={<List clickHandler={this.onVideoPlay} deleteHandler={this.onVideoRemove} data={videos} />}
         right={
-          <YTPlayer
-            isEmptyPlaylist={isEmptyPlaylist}
-            selectedVideo={selectedVideo}
-            onReady={this.onVideoReady}
-            onEnd={this.onEnd}
-          />
+            <YTPlayer
+              isEmptyPlaylist={isEmptyPlaylist}
+              selectedVideo={selectedVideo}
+              onReady={this.onVideoReady}
+              onEnd={this.onEnd}
+            />
         }
       />
     );

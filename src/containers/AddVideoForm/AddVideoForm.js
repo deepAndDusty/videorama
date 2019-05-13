@@ -30,7 +30,6 @@ export default class AddVideoForm extends Component {
     switch (name) {
       case "videoID":
         let invalidUrlErrorMessage = 'URL is invalid';
-        debugger
         if(value.length && /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(value)){
           invalidUrlErrorMessage = '';
           this._updateError(invalidUrlErrorMessage);
@@ -52,7 +51,6 @@ export default class AddVideoForm extends Component {
   _extractVideoID = url => url.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/)[2];
 
   handleSubmit = e => {
-    debugger
     e.preventDefault();
     const { onVideoSubmited } = this.props;
     const {form} = this.state;
