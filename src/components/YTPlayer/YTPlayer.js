@@ -14,7 +14,7 @@ const YTPlayer = ({ selectedVideo, onReady, onEnd, isEmptyPlaylist }) => {
       frameBorder: 0
     }
   };
-  const shouldShowMessage = videoID && !isEmptyPlaylist;
+  const shouldShowMessage = videoID;
   return (
     <div className={classes.playerContainer}>
       {!shouldShowMessage ? (

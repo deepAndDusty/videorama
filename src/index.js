@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider, connect } from "react-redux";
+import { Provider } from "react-redux";
 import throttle from 'lodash/throttle';
 
 import { createStore, combineReducers } from "redux";
@@ -23,7 +23,7 @@ const store = createStore(videosReducer, storedState);
 
 store.subscribe(throttle(()=> {
   const updatedState = store.getState();
-  saveState(updatedState);
+  saveState("videorama", updatedState);
 }), 1000);
 
 ReactDOM.render(

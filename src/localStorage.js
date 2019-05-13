@@ -16,7 +16,8 @@ export const saveState = (item, state) => {
     if (!state && state !== "undefined") {
         return undefined;
     }
-    const serializedState = JSON.stringify(state[item]);
+    const serializedState = JSON.stringify(state);
+    debugger
     window.localStorage.setItem(item, serializedState);
   } catch (err) {
     console.error(err, "issues with localStorage");
