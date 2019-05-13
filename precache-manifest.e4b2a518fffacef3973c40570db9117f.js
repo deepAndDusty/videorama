@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "45f11b94ad69da77e5963cb803c66ee6",
+    "revision": "6769b3453ed4272e7f8f40d9e1e8724e",
     "url": "/videorama/index.html"
   },
   {
-    "revision": "02dd89a5b11ab22cf587",
+    "revision": "f9ff5375ed9ea43620f5",
     "url": "/videorama/static/css/main.23744559.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/videorama/static/js/2.1c1faf2c.chunk.js"
   },
   {
-    "revision": "02dd89a5b11ab22cf587",
-    "url": "/videorama/static/js/main.82c6f392.chunk.js"
+    "revision": "f9ff5375ed9ea43620f5",
+    "url": "/videorama/static/js/main.8d53f528.chunk.js"
   },
   {
     "revision": "20c47304f659a5396bfb",
