@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/videorama/static/css/main.974a5479.chunk.css",
-    "main.js": "/videorama/static/js/main.ea62c30c.chunk.js",
-    "main.js.map": "/videorama/static/js/main.ea62c30c.chunk.js.map",
+    "main.css": "/videorama/static/css/main.23744559.chunk.css",
+    "main.js": "/videorama/static/js/main.ae5151ac.chunk.js",
+    "main.js.map": "/videorama/static/js/main.ae5151ac.chunk.js.map",
     "runtime~main.js": "/videorama/static/js/runtime~main.2d14d5d5.js",
     "runtime~main.js.map": "/videorama/static/js/runtime~main.2d14d5d5.js.map",
     "static/js/2.1c1faf2c.chunk.js": "/videorama/static/js/2.1c1faf2c.chunk.js",
     "static/js/2.1c1faf2c.chunk.js.map": "/videorama/static/js/2.1c1faf2c.chunk.js.map",
     "index.html": "/videorama/index.html",
-    "precache-manifest.cc75d386ced76edf6eef7c007f3a6217.js": "/videorama/precache-manifest.cc75d386ced76edf6eef7c007f3a6217.js",
+    "precache-manifest.65a333e8d6e2fe2ad667f715cd8458d3.js": "/videorama/precache-manifest.65a333e8d6e2fe2ad667f715cd8458d3.js",
     "service-worker.js": "/videorama/service-worker.js",
-    "static/css/main.974a5479.chunk.css.map": "/videorama/static/css/main.974a5479.chunk.css.map"
+    "static/css/main.23744559.chunk.css.map": "/videorama/static/css/main.23744559.chunk.css.map"
   }
 }
