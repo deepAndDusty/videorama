@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/videorama/precache-manifest.687a91c7d98d49d8277b26b0043b7df8.js"
+  "/videorama/precache-manifest.ac2c8822046833a83593f592c7fc9261.js"
 );
 
 self.addEventListener('message', (event) => {
