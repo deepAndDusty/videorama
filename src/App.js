@@ -16,7 +16,7 @@ class App extends Component {
     continuousPlay: true
   };
 
-  _getInitialVideoID = () => {
+  getInitialVideoID = () => {
     const { videoID } = this.props.selectedVideo;
     const { continuousPlay } = this.state;
     if (videoID) {
@@ -27,11 +27,11 @@ class App extends Component {
     }
   };
 
-  _validateVideo = videoID =>
+  validateVideo = videoID =>
     this.props.videos.some(video => video.videoID === videoID);
 
   onVideoSubmited = video => {
-    const hasVideo = this._validateVideo(video.videoID);
+    const hasVideo = this.validateVideo(video.videoID);
     if (hasVideo) {
       alert(
         `This video from: ${video.artist} with title: ${video.title} already exists in this playlist.`
@@ -52,12 +52,11 @@ class App extends Component {
     selectVideo(videos[nextIndex]);
   };
 
-  // YTPlayler callbacks
   onVideoReady = event => {
     const { videos } = this.props;
     const isEmptyPlaylist = !(videos && videos.length);
     if (!isEmptyPlaylist) {
-      const nextVideoID = this._getInitialVideoID();
+      const nextVideoID = this.getInitialVideoID();
       event.target.loadVideoById(nextVideoID);
     }
   };

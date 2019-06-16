@@ -32,7 +32,7 @@ const AddVideoForm = props => {
             className={classses.formInput}
             value={formState[el]}
             autoComplete="off"
-            onChange={e => _handleChange(e)}
+            onChange={e => handleChange(e)}
             required
           />
         </label>
@@ -40,7 +40,7 @@ const AddVideoForm = props => {
     );
   });
 
-  const _updateError = message => {
+  const updateError = message => {
     setFormState(prevState => {
       return {
         ...prevState,
@@ -49,7 +49,7 @@ const AddVideoForm = props => {
     });
   };
 
-  const _validateInput = (name, value) => {
+  const validateInput = (name, value) => {
     switch (name) {
       case "videoID":
         let invalidUrlErrorMessage = "URL is invalid";
@@ -57,23 +57,23 @@ const AddVideoForm = props => {
           value.length && /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(value)
         ) {
           invalidUrlErrorMessage = "";
-          _updateError(invalidUrlErrorMessage);
+          updateError(invalidUrlErrorMessage);
           return true;
         }
-        _updateError(invalidUrlErrorMessage);
+        updateError(invalidUrlErrorMessage);
         return true;
       default:
         if (!value.length) {
           let lengthErrorMessage = "Please fill out all fields";
-          _updateError(lengthErrorMessage);
+          updateError(lengthErrorMessage);
           return;
         }
-        _updateError("");
+        updateError("");
         return !value.length;
     }
   };
 
-  const _extractVideoID = url => {
+  const extractVideoID = url => {
     if(!url) return;
     return url.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/)[2];
   };
@@ -82,18 +82,18 @@ const AddVideoForm = props => {
     e.preventDefault();
     const { onVideoSubmited } = props;
     const { form } = formState;
-    const videoID =_extractVideoID();
+    const videoID =extractVideoID();
     const updatedData = {
       ...form,
-      videoID: _extractVideoID(form.videoID)
+      videoID: extractVideoID(form.videoID)
     };
     onVideoSubmited(updatedData);
-    _resetForm();
+    resetForm();
   };
 
-  const _handleChange = e => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    _validateInput(name, value);
+    validateInput(name, value);
 
     setFormState(prevState => {
       return {
@@ -106,7 +106,7 @@ const AddVideoForm = props => {
     });
   };
 
-  const _resetForm = () => {
+  const resetForm = () => {
     videoForm.current.reset();
   };
 
