@@ -16,7 +16,7 @@ const storedState = loadState('videorama');
 
 const store = createStore(videosReducer, storedState);
 
-store.subscribe(throttle(()=> {
+store.subscribe(throttle(() => {
   const updatedState = store.getState();
   saveState("videorama", updatedState);
 }), 1000);

@@ -6,20 +6,25 @@
     text-align: right;
   }
 }
+.errorMessage{
+  font-size: $baseFontSize;
+}
 .inputLabel {
   text-transform: capitalize;
-  color: $secondary;
+  color: $sand;
 }
 .formInput {
   display: block;
   margin-top: $baseSize / 2; 
   background-image: linear-gradient(to left top, $primary, $darken);
-  height: 18px;
   border-radius: 7px;
   border-color: $primary $darken;
   width: 90%;
   transition: all .2s;
-  color: $secondary;
+  color: $fontColor;
+  height: $baseSize * 2;
+  padding-left: $baseSize;
+  font-size: $baseFontSize;
 
   &:focus {
     outline-width: 0;
@@ -46,5 +51,6 @@
   .formInput {
     display: inline-flex;
     margin: $baseSize / 2; 
+    height: $baseSize * 1.3;
   }
 }

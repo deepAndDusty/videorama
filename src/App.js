@@ -5,6 +5,7 @@ import SplitPane from "./components/SplitPane/SplitPane";
 import AddVideoForm from "./containers/AddVideoForm/AddVideoForm";
 import List from "./components/List/List";
 import YTPlayer from "./components/YTPlayer/YTPlayer";
+// eslint-disable-next-line
 import fa from "./FontAwesome";
 import * as actionTypes from "./store/actions";
 
@@ -27,8 +28,7 @@ class App extends Component {
     }
   };
 
-  validateVideo = videoID =>
-    this.props.videos.some(video => video.videoID === videoID);
+  validateVideo = videoID => this.props.videos.some(video => video.videoID === videoID);
 
   onVideoSubmited = video => {
     const hasVideo = this.validateVideo(video.videoID);
@@ -42,9 +42,7 @@ class App extends Component {
 
   playNextVideo = previousVideoID => {
     const {selectVideo, videos} = this.props;
-    const indexOfCurrent = videos.findIndex(e => {
-      return e.videoID === previousVideoID;
-    });
+    const indexOfCurrent = videos.findIndex(e => e.videoID === previousVideoID);
     let nextIndex = indexOfCurrent + 1;
     if (!videos[nextIndex]) {
       nextIndex = 0;
@@ -54,8 +52,8 @@ class App extends Component {
 
   onVideoReady = event => {
     const { videos } = this.props;
-    const isEmptyPlaylist = !(videos && videos.length);
-    if (!isEmptyPlaylist) {
+    const isPlaylistEmpty = !(videos && videos.length);
+    if (!isPlaylistEmpty) {
       const nextVideoID = this.getInitialVideoID();
       event.target.loadVideoById(nextVideoID);
     }
@@ -79,7 +77,9 @@ class App extends Component {
     return (
       <div className="mainContainer">
         <SplitPane
-          leftTop={<AddVideoForm onVideoSubmited={addVideo} />}
+          leftTop={
+            <AddVideoForm onVideoSubmited={addVideo} />
+          }
           leftBottom={
             <List
               clickHandler={this.onVideoPlay}

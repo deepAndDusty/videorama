@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import classes from "./YTPlayer.module.scss";
 import YouTube from "react-youtube";
@@ -16,13 +16,21 @@ const YTPlayer = ({ selectedVideo, onReady, onEnd, isEmptyPlaylist }) => {
   };
   const shouldShowMessage = videoID;
   return (
-    <div className={classes.playerContainer}>
-      {!shouldShowMessage ? (
-        <div className={classes.noVideoSelected}>Add videos to start</div>
-      ) : (
-        <YouTube videoId={videoID} onEnd={onEnd} opts={opts} onReady={onReady} />
-      )}
-    </div>
+    <Fragment>
+      <div className={classes.title}>VIDEORAMA</div>
+      <div className={classes.playerContainer}>
+        {!shouldShowMessage ? (
+          <div className={classes.noVideoSelected}>Add videos to start</div>
+        ) : (
+          <YouTube
+            videoId={videoID}
+            onEnd={onEnd}
+            opts={opts}
+            onReady={onReady}
+          />
+        )}
+      </div>
+    </Fragment>
   );
 };
 

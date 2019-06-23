@@ -1,5 +1,5 @@
 import React, { useState, createRef } from "react";
-import classses from "./AddVideoForm.module.scss";
+import classes from "./AddVideoForm.module.scss";
 import PropTypes from "prop-types";
 
 const FIELDS = ["artist", "title", "videoID"];
@@ -23,13 +23,13 @@ const AddVideoForm = props => {
   const formContent = FIELDS.map((el, idx) => {
     const label = el.toUpperCase;
     return (
-      <div className={classses.inputContainer} key={idx}>
-        <label className={classses.inputLabel}>
+      <div className={classes.inputContainer} key={idx}>
+        <label className={classes.inputLabel}>
           {el}
           <input
             name={el}
             type="text"
-            className={classses.formInput}
+            className={classes.formInput}
             value={formState[el]}
             autoComplete="off"
             onChange={e => handleChange(e)}
@@ -54,7 +54,8 @@ const AddVideoForm = props => {
       case "videoID":
         let invalidUrlErrorMessage = "URL is invalid";
         if (
-          value.length && /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(value)
+          value.length &&
+          /^(https?:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(value)
         ) {
           invalidUrlErrorMessage = "";
           updateError(invalidUrlErrorMessage);
@@ -74,7 +75,7 @@ const AddVideoForm = props => {
   };
 
   const extractVideoID = url => {
-    if(!url) return;
+    if (!url) return;
     return url.match(/(^|=|\/)([0-9A-Za-z_-]{11})(\/|&|$|\?|#)/)[2];
   };
 
@@ -82,10 +83,10 @@ const AddVideoForm = props => {
     e.preventDefault();
     const { onVideoSubmited } = props;
     const { form } = formState;
-    const videoID =extractVideoID();
+    const videoID = extractVideoID(form.videoID);
     const updatedData = {
       ...form,
-      videoID: extractVideoID(form.videoID)
+      videoID
     };
     onVideoSubmited(updatedData);
     resetForm();
@@ -111,22 +112,24 @@ const AddVideoForm = props => {
   };
 
   return (
-    <form ref={videoForm} onSubmit={(e) => handleSubmit(e)}>
+    <form ref={videoForm} onSubmit={e => handleSubmit(e)}>
       {formContent}
-      <div className={classses.inputContainer}>
-        {hasError ? errorMessage : null}
-        <button disabled={hasError} className={classses.submitButton} type="submit">
+      <div className={classes.inputContainer}>
+        {hasError ? <span className={classes.errorMessage}>errorMessage</span> : null}
+        <button
+          disabled={hasError}
+          className={classes.submitButton}
+          type="submit"
+        >
           Add
         </button>
       </div>
     </form>
   );
-
-
 };
 
 AddVideoForm.propTypes = {
   onVideoSubmited: PropTypes.func.isRequired
-}
+};
 
 export default AddVideoForm;
