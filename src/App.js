@@ -10,34 +10,23 @@ import fa from "./FontAwesome";
 import * as actionTypes from "./store/actions";
 
 class App extends Component {
-  state = {
-    videos: [],
-    selectedVideo: {},
-    isEmptyPlaylist: true,
-    continuousPlay: true
-  };
+
+  componentDidMount(){
+    this.initializePlaylist()
+  }
+
+  initializePlaylist() {
+    const { getVideos } = this.props;
+    this.props.getVideos();
+  }
 
   getInitialVideoID = () => {
     const { videoID } = this.props.selectedVideo;
-    const { continuousPlay } = this.state;
     if (videoID) {
       return videoID;
-    } else if (continuousPlay) {
-      const { videos } = this.props;
-      return videos[0].videoID;
-    }
-  };
-
-  validateVideo = videoID => this.props.videos.some(video => video.videoID === videoID);
-
-  onVideoSubmited = video => {
-    const hasVideo = this.validateVideo(video.videoID);
-    if (hasVideo) {
-      alert(
-        `This video from: ${video.artist} with title: ${video.title} already exists in this playlist.`
-      );
-      return;
-    }
+    } 
+    const { videos } = this.props;
+    return videos[0].videoID;
   };
 
   playNextVideo = previousVideoID => {
@@ -66,14 +55,14 @@ class App extends Component {
 
   onEnd = event => {
     const previousVideo = event.target.getVideoData();
-    if (this.state.continuousPlay) {
-      this.playNextVideo(previousVideo.video_id);
-    }
+    this.playNextVideo(previousVideo.video_id);
   };
 
   render() {
     const { videos, selectedVideo, addVideo, removeVideo } = this.props;
-    const isEmptyPlaylist = !!(this.videos && !this.videos.length);
+    const hasPlaylist = videos && videos.length;
+
+
     return (
       <div className="mainContainer">
         <SplitPane
@@ -89,7 +78,7 @@ class App extends Component {
           }
           right={
             <YTPlayer
-              isEmptyPlaylist={isEmptyPlaylist}
+              isEmptyPlaylist={!hasPlaylist}
               selectedVideo={selectedVideo}
               onReady={this.onVideoReady}
               onEnd={this.onEnd}
@@ -106,6 +95,7 @@ App.propTypes = {
   selectedVideo: PropTypes.object,
   selectVideo: PropTypes.func,
   addVideo: PropTypes.func,
+  getVideos: PropTypes.func,
   removeVideo: PropTypes.func
 };
 
@@ -118,13 +108,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addVideo: video =>
-      dispatch({ type: actionTypes.ADD_VIDEO, payload: video }),
-    removeVideo: video =>
-      dispatch({ type: actionTypes.REMOVE_VIDEO, payload: video.videoID }),
-    selectVideo: video => {
-      dispatch({ type: actionTypes.SELECT_VIDEO, payload: video.videoID });
-    }
+    addVideo: video => dispatch({ type: actionTypes.ADD_VIDEO, payload: video }),
+    removeVideo: video => dispatch({ type: actionTypes.REMOVE_VIDEO, payload: video.videoID }),
+    selectVideo: video => dispatch({ type: actionTypes.SELECT_VIDEO, payload: video.videoID }),
+    getVideos: () => dispatch({ type: actionTypes.GET_VIDEOS })
   };
 };
 

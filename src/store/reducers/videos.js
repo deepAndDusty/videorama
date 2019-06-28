@@ -1,9 +1,11 @@
 import * as actionTypes from "../actions";
+import { loadState } from "../../localStorage";
 
 const initialState = {
   videos: [],
-  selectedVideo: {}
+  selectedVideo: {},
 };
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,6 +21,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         videos: updatedState
       };
+    case actionTypes.GET_VIDEOS:
+      const storedState = loadState('videorama');
+      return {
+        ...state,
+        ...storedState,
+      };
     case actionTypes.SELECT_VIDEO:
       const newSelectedVideo = state.videos.filter(item => item.videoID === action.payload);
       return {
@@ -26,7 +34,7 @@ const reducer = (state = initialState, action) => {
           selectedVideo: newSelectedVideo[0]
         };
     default:
-      return { ...state };
+      return state;
   }
 };
 

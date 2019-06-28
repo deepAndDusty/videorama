@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classes from "./YTPlayer.module.scss";
 import YouTube from "react-youtube";
 
 const YTPlayer = ({ selectedVideo, onReady, onEnd, isEmptyPlaylist }) => {
-  const { videoID } = selectedVideo || {};
+  const { videoID } = selectedVideo;
 
   const opts = {
     width: "100%",
@@ -14,12 +14,12 @@ const YTPlayer = ({ selectedVideo, onReady, onEnd, isEmptyPlaylist }) => {
       frameBorder: 0
     }
   };
-  const shouldShowMessage = videoID;
+  
   return (
-    <Fragment>
+    <>
       <div className={classes.title}>VIDEORAMA</div>
       <div className={classes.playerContainer}>
-        {!shouldShowMessage ? (
+        {isEmptyPlaylist ? (
           <div className={classes.noVideoSelected}>Add videos to start</div>
         ) : (
           <YouTube
@@ -30,7 +30,7 @@ const YTPlayer = ({ selectedVideo, onReady, onEnd, isEmptyPlaylist }) => {
           />
         )}
       </div>
-    </Fragment>
+    </>
   );
 };
 

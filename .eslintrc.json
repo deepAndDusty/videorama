@@ -20,8 +20,10 @@
     "plugins": [
         "react"
     ],
-    "rules": {
-        "react/jsx-fragments": [1, "element"]
+    "settings": {
+        "react": {
+            "version": "16.8"
+        }
     },
     "parser": "babel-eslint"
 }
